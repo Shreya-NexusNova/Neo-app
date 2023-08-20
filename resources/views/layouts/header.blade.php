@@ -4,7 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
         <title>Nexus Nova Ltd </title>
- 
+
         <!-- Icons -->
         <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
   <!--       <link rel="shortcut icon" href="{{asset('public/img/fav1.png')}}">
@@ -33,10 +33,10 @@
                 <link rel="stylesheet" href="{{asset('public/dashboard_assets/js/plugins/flatpickr/flatpickr.min.css')}}">
                         <link rel="stylesheet"  href="{{asset('public/css/dropify.css')}}">
         <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
-         
+
         <!-- END Stylesheets-->
          <link rel="stylesheet" id="css-theme" href="{{asset('public/dashboard_assets/css/themes/xpro.min.css')}}">
-     
+
 <style type="text/css">
     .error{
         color: #d73838;
@@ -44,8 +44,11 @@
     .select2{
         width: 100%!important;
     }
+    .bg-primary-sidebar{
+        background-color:#34495E!important;
+    }
 
- 
+
  ::-webkit-scrollbar
 {
     width: 10px;
@@ -63,35 +66,39 @@
     color: black;
  }
  .btn-alt-primary {
-     color: #272262;
-    background-color: #71cde6!important;
-    border-color: #71cde6!important;
+     color: white;
+    background-color: #34495E!important;
+}
+.btn-alt-primary:hover {
+     color: beige!important;
+    background-color: #34495E!important;
 }
 .btn-primary{
     background-color: #286093!important;
 }
 .bg-header-dark{
-  background: url('public/img/NN_WebBackground.jpg')!important;
+  /* background: url('public/img/NN_WebBackground.jpg')!important; */
+  background-color: #85929E!important;
 }
 a{
     color: #286092;
 }
- 
+
 </style>
     </head>
     <body>
-      
+
         @yield('sidebar')
 
               <!-- Header -->
-            <header id="page-header" style="background: #0d141a;">
+            <header id="page-header" style="background: #34495E;">
                 <!-- Header Content -->
                 <div class="content-header">
                     <!-- Left Section -->
                     <div class="d-flex align-items-center">
                         <!-- Logo -->
                         <a class="font-w600 text-dual tracking-wide" href="{{url('/')}}">
-                         <img src="{{asset('public/img/NN_Business Card Front.png')}}" width="180px">
+                         <img src="{{asset('public/img/NN_logowithslogan.png')}}" width="180px">
                         </a>
                         <!-- END Logo -->
 
@@ -112,14 +119,14 @@ a{
                                 <ul class="nav-main-submenu">
                                     <li class="nav-main-item">
                                         <a class="nav-main-link" href="{{url('log-issue')}}">
-                                    
+
                                             <span class="nav-main-link-name">Log Issue</span>
-                                    
+
                                         </a>
                                     </li>
                                     <li class="nav-main-item">
                                         <a class="nav-main-link" href="{{url('my-issues')}}">
-                                          
+
                                             <span class="nav-main-link-name">
                                             @if(Auth::user()->role=='user')My
                                             @else
@@ -129,7 +136,7 @@ a{
 
                                         </a>
                                     </li>
-                                   
+
                                 </ul>
                             </li>
                              @if(Auth::user()->role=='admin')
@@ -155,24 +162,24 @@ a{
                                 <ul class="nav-main-submenu">
                                     <li class="nav-main-item">
                                         <a class="nav-main-link" href="{{url('issue-type')}}">
-                                    
+
                                             <span class="nav-main-link-name">Issue Type</span>
-                                    
+
                                         </a>
                                     </li>
                                     <li class="nav-main-item">
                                         <a class="nav-main-link" href="{{url('location')}}">
-                                          
+
                                             <span class="nav-main-link-name">
-                                            
+
                                             Location</span>
 
                                         </a>
                                     </li>
-                                   
+
                            <li class="nav-main-item">
                                 <a class="nav-main-link" href="{{url('staff-role')}}">
-                                     
+
                                     <span class="nav-main-link-name">Staff Role</span>
                                 </a>
                             </li>
@@ -190,8 +197,8 @@ a{
                                     <span class="nav-main-link-name">Logout</span>
                                 </a>
                             </li>
-                         
-         
+
+
                         </ul>
                         <!-- END Menu -->
                     </div>
@@ -202,16 +209,16 @@ a{
                            <form id="form-logout" action="{{url('logout')}}" method="post">
                                     @csrf
                             </form>
-                    
+
                         <!-- Open Search Section -->
                         <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                       
+
                         <!-- END Open Search Section -->
 
                         <!-- Search form in larger screens -->
-                    
+
                         <!-- Notifications Dropdown -->
-                    
+
 
                         <!-- Toggle Sidebar -->
                         <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
@@ -254,5 +261,4 @@ a{
             </header>
             <!-- END Header -->
         @yield('content')
-          @yield('footer')  
- 
+          @yield('footer')

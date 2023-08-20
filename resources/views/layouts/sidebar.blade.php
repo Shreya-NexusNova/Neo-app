@@ -1,7 +1,7 @@
 
 @section('sidebar')
 
- 
+
   <div id="page-container" class="sidebar-dark side-scroll page-header-fixed page-header-dark main-content-boxed">
 
             <!-- Sidebar -->
@@ -18,7 +18,7 @@
             -->
             <nav id="sidebar" aria-label="Main Navigation">
                 <!-- Side Header -->
-                <div class="content-header bg-primary">
+                <div class="content-header bg-primary-sidebar">
                     <!-- Logo -->
                     <a class="font-w600 text-white tracking-wide" href="index.html">
                         Nexus  <span class="opacity-75">Nova</span>
@@ -55,7 +55,7 @@
                     <!-- END User Info -->
 
                     <!-- Side Navigation -->
-                    <div class="content-side content-side-full">
+                    <div class="content-side content-side-full bg-black-2">
                         <ul class="nav-main">
                                <!-- Menu -->
                          <li class="nav-main-item">
@@ -73,14 +73,14 @@
                                 <ul class="nav-main-submenu">
                                     <li class="nav-main-item">
                                         <a class="nav-main-link" href="{{url('log-issue')}}">
-                                    
+
                                             <span class="nav-main-link-name">Log Issue</span>
-                                    
+
                                         </a>
                                     </li>
                                     <li class="nav-main-item">
                                         <a class="nav-main-link" href="{{url('my-issues')}}">
-                                          
+
                                             <span class="nav-main-link-name">
                                             @if(Auth::user()->role=='user')My
                                             @else
@@ -90,7 +90,7 @@
 
                                         </a>
                                     </li>
-                                   
+
                                 </ul>
                             </li>
                              @if(Auth::user()->role=='admin')
@@ -115,8 +115,8 @@
                                     <span class="nav-main-link-name">Logout</span>
                                 </a>
                             </li>
-                         
-                               
+
+
                         </ul>
                     </div>
                     <!-- END Side Navigation -->
@@ -134,4 +134,3 @@
 
 
 
-  

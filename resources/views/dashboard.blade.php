@@ -1,4 +1,4 @@
-  
+
 @extends('layouts.header')
 @extends('layouts.sidebar')
 @extends('layouts.footer')
@@ -6,23 +6,23 @@
 <?php
 
 
- 
+
 
 
 if(Auth::user()->role=='user'){
-$myIssues=DB::table('issue')->where('user_id',Auth::id())->count();
-$resolvedIssues=DB::table('issue')->where('user_id',Auth::id())->where('status','Resolved')->count();
-$unresolvedIssues=DB::table('issue')->where('user_id',Auth::id())->where('status','Unresolved')->count();
-$todayIssues=DB::table('issue')->where('user_id',Auth::id())->where('created_at','>=',date('Y-m-d 00:00:00'))->where('created_at','<=',date('Y-m-d 23:59:59'))->count();
-    $qry=DB::table('issue as i')->select('i.*','u.name','l.location_name','it.type_name','itd.type_detail_name') ->leftjoin('location as l','l.id','=','i.location')->leftjoin('issue_type as it','it.id','=','i.issue_type_id')->leftjoin('issue_type_detail as itd','itd.id','=','i.issue_sub_id')->leftjoin('users as u','u.id','=','i.user_id')->where('i.created_at','>=',date('Y-m-d 00:00:00'))->where('i.created_at','<=',date('Y-m-d 23:59:59')) ->where('i.user_id',Auth::id()) ->where('i.is_deleted',0)->orderBy('i.id','desc')->get(); 
+$myIssues=DB::table('issue')->where('user_id',Auth::id())->where('is_deleted',0)->count();
+$resolvedIssues=DB::table('issue')->where('user_id',Auth::id())->where('status','Resolved')->where('is_deleted',0)->count();
+$unresolvedIssues=DB::table('issue')->where('user_id',Auth::id())->where('status','Unresolved')->where('is_deleted',0)->count();
+$todayIssues=DB::table('issue')->where('user_id',Auth::id())->where('created_at','>=',date('Y-m-d 00:00:00'))->where('created_at','<=',date('Y-m-d 23:59:59'))->where('is_deleted',0)->count();
+    $qry=DB::table('issue as i')->select('i.*','u.name','l.location_name','it.type_name','itd.type_detail_name') ->leftjoin('location as l','l.id','=','i.location')->leftjoin('issue_type as it','it.id','=','i.issue_type_id')->leftjoin('issue_type_detail as itd','itd.id','=','i.issue_sub_id')->leftjoin('users as u','u.id','=','i.user_id')->where('i.created_at','>=',date('Y-m-d 00:00:00'))->where('i.created_at','<=',date('Y-m-d 23:59:59')) ->where('i.user_id',Auth::id()) ->where('i.is_deleted',0)->orderBy('i.id','desc')->get();
 
 }
 else{
- $myIssues=DB::table('issue')->count();   
- $todayIssues=DB::table('issue')->where('created_at','>=',date('Y-m-d 00:00:00'))->where('created_at','<=',date('Y-m-d 23:59:59'))->count();
-$resolvedIssues=DB::table('issue') ->where('status','Resolved')->count();
-$unresolvedIssues=DB::table('issue') ->where('status','Unresolved')->count();
- $qry=DB::table('issue as i')->select('i.*','u.name','l.location_name','it.type_name','itd.type_detail_name') ->leftjoin('location as l','l.id','=','i.location')->where('i.created_at','>=',date('Y-m-d 00:00:00'))->where('i.created_at','<=',date('Y-m-d 23:59:59'))->leftjoin('issue_type as it','it.id','=','i.issue_type_id')->leftjoin('issue_type_detail as itd','itd.id','=','i.issue_sub_id')->leftjoin('users as u','u.id','=','i.user_id')  ->where('i.is_deleted',0)->orderBy('i.id','desc')->get(); 
+ $myIssues=DB::table('issue')->where('is_deleted',0)->count();
+ $todayIssues=DB::table('issue')->where('created_at','>=',date('Y-m-d 00:00:00'))->where('created_at','<=',date('Y-m-d 23:59:59'))->where('is_deleted',0)->count();
+$resolvedIssues=DB::table('issue') ->where('status','Resolved')->where('is_deleted',0)->count();
+$unresolvedIssues=DB::table('issue') ->where('status','Unresolved')->where('is_deleted',0)->count();
+ $qry=DB::table('issue as i')->select('i.*','u.name','l.location_name','it.type_name','itd.type_detail_name') ->leftjoin('location as l','l.id','=','i.location')->where('i.created_at','>=',date('Y-m-d 00:00:00'))->where('i.created_at','<=',date('Y-m-d 23:59:59'))->leftjoin('issue_type as it','it.id','=','i.issue_type_id')->leftjoin('issue_type_detail as itd','itd.id','=','i.issue_sub_id')->leftjoin('users as u','u.id','=','i.user_id')  ->where('i.is_deleted',0)->orderBy('i.id','desc')->get();
 
 }
 
@@ -45,7 +45,7 @@ $users=DB::Table('users')->where('is_deleted',0)->count();
                                     <i class="fa fa-plus mr-1"></i> Log Issue
 
                                 </a>
-                           
+
                             </div>
                         </div>
                     </div>
@@ -66,8 +66,8 @@ $users=DB::Table('users')->where('is_deleted',0)->count();
                         </nav>
                         <!-- END Breadcrumb -->
 
-                      
- 
+
+
 
                         <!-- Quick Stats -->
                         <div class="row">
@@ -123,7 +123,7 @@ $users=DB::Table('users')->where('is_deleted',0)->count();
                                 </a>
                             </div>
                             @endif
-                          
+
                         </div>
                         <!-- END Quick Stats -->
 
@@ -135,7 +135,7 @@ $users=DB::Table('users')->where('is_deleted',0)->count();
                                     <div class="block-header border-bottom">
                                         <h3 class="block-title">Today Issues</h3>
                                         <div class="block-options">
-                                           
+
                                         </div>
                                     </div>
                                     <div class="block-content table-responsive">
@@ -143,27 +143,27 @@ $users=DB::Table('users')->where('is_deleted',0)->count();
                                             <thead>
                                                 <tr class="text-uppercase">
                                                                  @if(Auth::user()->role=='admin')
-                                            <th style="min-width: 120px"><a href="{{url()->current()}}?{{isset($_GET['search'])?'search='.$_GET['search']:''}}&orderBy={{@$_GET['orderBy']=='desc'?'asc':'desc'}}&field=u.name" class=" 
+                                            <th style="min-width: 120px"><a href="{{url()->current()}}?{{isset($_GET['search'])?'search='.$_GET['search']:''}}&orderBy={{@$_GET['orderBy']=='desc'?'asc':'desc'}}&field=u.name" class="
                                                 ">Added By</a></th>
                                                 @endif
-                                            <th><a href="{{url()->current()}}?{{isset($_GET['search'])?'search='.$_GET['search']:''}}&orderBy={{@$_GET['orderBy']=='desc'?'asc':'desc'}}&field=it.type_name" class=" 
+                                            <th><a href="{{url()->current()}}?{{isset($_GET['search'])?'search='.$_GET['search']:''}}&orderBy={{@$_GET['orderBy']=='desc'?'asc':'desc'}}&field=it.type_name" class="
                                                 ">Type  </a></th>
-                                                 
-                                      
-                                       
-                                                   <th><a href="{{url()->current()}}?{{isset($_GET['search'])?'search='.$_GET['search']:''}}&orderBy={{@$_GET['orderBy']=='desc'?'asc':'desc'}}&field=l.location_name" class=" 
+
+
+
+                                                   <th><a href="{{url()->current()}}?{{isset($_GET['search'])?'search='.$_GET['search']:''}}&orderBy={{@$_GET['orderBy']=='desc'?'asc':'desc'}}&field=l.location_name" class="
                                                 ">Location  </a></th>
-                                             
-                                  
-                                                <th><a href="{{url()->current()}}?{{isset($_GET['search'])?'search='.$_GET['search']:''}}&orderBy={{@$_GET['orderBy']=='desc'?'asc':'desc'}}&field=i.staff_firstname" class=" 
+
+
+                                                <th><a href="{{url()->current()}}?{{isset($_GET['search'])?'search='.$_GET['search']:''}}&orderBy={{@$_GET['orderBy']=='desc'?'asc':'desc'}}&field=i.staff_firstname" class="
                                                 ">Staff   </a></th>
-                                              
-                                                <th><a href="{{url()->current()}}?{{isset($_GET['search'])?'search='.$_GET['search']:''}}&orderBy={{@$_GET['orderBy']=='desc'?'asc':'desc'}}&field=i.email" class=" 
+
+                                                <th><a href="{{url()->current()}}?{{isset($_GET['search'])?'search='.$_GET['search']:''}}&orderBy={{@$_GET['orderBy']=='desc'?'asc':'desc'}}&field=i.email" class="
                                                 ">Email  </a></th>
-                                                <th><a href="{{url()->current()}}?{{isset($_GET['search'])?'search='.$_GET['search']:''}}&orderBy={{@$_GET['orderBy']=='desc'?'asc':'desc'}}&field=i.phone" class=" 
+                                                <th><a href="{{url()->current()}}?{{isset($_GET['search'])?'search='.$_GET['search']:''}}&orderBy={{@$_GET['orderBy']=='desc'?'asc':'desc'}}&field=i.phone" class="
                                                 ">Phone  </a></th>
-                                             
-                                                     <th><a href="{{url()->current()}}?{{isset($_GET['search'])?'search='.$_GET['search']:''}}&orderBy={{@$_GET['orderBy']=='desc'?'asc':'desc'}}&field=i.status" class=" 
+
+                                                     <th><a href="{{url()->current()}}?{{isset($_GET['search'])?'search='.$_GET['search']:''}}&orderBy={{@$_GET['orderBy']=='desc'?'asc':'desc'}}&field=i.status" class="
                                                 ">Status  </a></th>
                                                 <th></th>
                                                 </tr>
@@ -175,39 +175,39 @@ $users=DB::Table('users')->where('is_deleted',0)->count();
                                                   <td>{{$q->name}}</td>
                                                   @endif
                                             <td class="font-w600">
-                                                  {{$q->type_name}}  
+                                                  {{$q->type_name}}
                                             </td>
-                                                
+
                                                     <td>{{$q->location_name}}</td>
-                                             
+
                                                    <td>{{$q->staff_firstname}} {{$q->staff_lastname}}</td>
-                                            
+
                                                    <td>{{$q->email}}</td>
-                                                   <td>{{$q->phone}}</td>  
+                                                   <td>{{$q->phone}}</td>
                                                      <td>
                                             @if($q->status=='Resolved')
                                                 <div class="badge badge-success">Resolved</div>
                                                 @else
-                                                <div class="badge badge-danger">Unresolved</div>                                                
+                                                <div class="badge badge-danger">Unresolved</div>
                                                 @endif
-                                            </td>     
+                                            </td>
                                             <td>    <a type="button" href="{{url('edit-issue')}}?id={{$q->id}}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Edit">
                                                         <i class="fa fa-eye"></i>
                                                     </a></td>
                                                 </tr>
                                                 @endforeach
-                                                
-                                                
+
+
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                                 <!-- END People -->
                             </div>
-                             
+
                         </div>
                         <!-- END People and Tickets -->
-                        
+
                     </div>
                 </div>
                 <!-- END Page Content -->

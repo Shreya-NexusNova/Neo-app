@@ -1,18 +1,18 @@
-  
+
 @extends('layouts.header')
 @extends('layouts.sidebar')
 @extends('layouts.footer')
 @section('content')
 
 
-<?php 
+<?php
 
 
 $limit=10;
-    
+
 if(isset($_GET['limit'])){
     $limit=$_GET['limit'];
-} 
+}
 
 
 
@@ -26,29 +26,29 @@ $field=$_GET['field'];
 }
 
 
- 
+
      $qry=DB::table('issue_type') ->where('is_deleted',0)->where(function($query){
-    
+
         $query->Orwhere('type_name','like','%'.@$_GET['search'].'%');
-       
-       
- 
-     }) ->orderBy($field,$orderby)->paginate($limit); 
+
+
+
+     }) ->orderBy($field,$orderby)->paginate($limit);
 }
  else{
-$qry=DB::table('issue_type') ->where('is_deleted',0)->orderBy('id','desc')->paginate($limit); 
- 
+$qry=DB::table('issue_type') ->where('is_deleted',0)->orderBy('id','desc')->paginate($limit);
+
  }
  ?>       <!-- Main Container -->
             <main id="main-container">
               <!-- Hero -->
-                <div class=" " style="background: #286092;">
+                <div class="bg-header-dark">
                     <div class="content content-full">
                         <div class="row pt-3">
                             <div class="col-md py-3 d-md-flex align-items-md-center text-center">
                                 <h1 class="text-white mb-0">
                                     <span class="font-w300">Issue Type</span>
-                                     
+
                                 </h1>
                             </div>
                             <div class="col-md py-3 d-md-flex align-items-md-center justify-content-md-end text-center">
@@ -56,7 +56,7 @@ $qry=DB::table('issue_type') ->where('is_deleted',0)->orderBy('id','desc')->pagi
                                     <i class="fa fa-plus mr-1"></i>Add Issue Type
 
                                 </a>
-                           
+
                             </div>
                         </div>
                     </div>
@@ -77,23 +77,23 @@ $qry=DB::table('issue_type') ->where('is_deleted',0)->orderBy('id','desc')->pagi
                         </nav>
                         <!-- END Breadcrumb -->
 
-             
+
                                              <!-- People -->
                                 <div class="block block-rounded block-bordered block-mode-loading-refresh">
                                     <div class="block-header border-bottom">
                                         <h3 class="block-title">Issue Type</h3>
                                         <div class="block-options">
-                                           
+
                                         </div>
                                     </div>
                                     <div class="block-content">
-                                   
-                                
+
+
                             <div class="row">
                           <div class="col-sm-3">
                         <form class="push"   method="get">
                                         <input type="hidden" name="limit" value="{{$_GET['limit']??10}}">
-                          
+
                                 <div class="input-group">
                                     <input type="text" value="{{@$_GET['search']}}" class="form-control" name="search" placeholder="Quick Search">
                                     <div class="input-group-append">
@@ -102,7 +102,7 @@ $qry=DB::table('issue_type') ->where('is_deleted',0)->orderBy('id','desc')->pagi
                                         </span>
                                     </div>
                                 </div>
-                                 
+
                             </form>
 </div>
 <div class="col-lg-5"></div>
@@ -117,26 +117,26 @@ $qry=DB::table('issue_type') ->where('is_deleted',0)->orderBy('id','desc')->pagi
                                 </select>
                             </form>
                         </div>
-                    
+
 </div>
 </div>
                             <div class="table-responsive">
                                   <table class="table table-striped table-hover table-borderless table-vcenter font-size-sm">
                                     <thead class="thead thead-light ">
                                         <tr>
-                                 <th><a href="{{url()->current()}}?{{isset($_GET['search'])?'search='.$_GET['search']:''}}&orderBy={{@$_GET['orderBy']=='desc'?'asc':'desc'}}&field=id" class=" 
+                                 <th><a href="{{url()->current()}}?{{isset($_GET['search'])?'search='.$_GET['search']:''}}&orderBy={{@$_GET['orderBy']=='desc'?'asc':'desc'}}&field=id" class="
                                                 ">#  </a></th>
-        
-                                 
-                                            <th><a href="{{url()->current()}}?{{isset($_GET['search'])?'search='.$_GET['search']:''}}&orderBy={{@$_GET['orderBy']=='desc'?'asc':'desc'}}&field=type_name" class=" 
+
+
+                                            <th><a href="{{url()->current()}}?{{isset($_GET['search'])?'search='.$_GET['search']:''}}&orderBy={{@$_GET['orderBy']=='desc'?'asc':'desc'}}&field=type_name" class="
                                                 ">Name  </a></th>
-                                                 
-                                          
-                                        
-                                                <th><a href="{{url()->current()}}?{{isset($_GET['search'])?'search='.$_GET['search']:''}}&orderBy={{@$_GET['orderBy']=='desc'?'asc':'desc'}}&field=created_at" class=" 
+
+
+
+                                                <th><a href="{{url()->current()}}?{{isset($_GET['search'])?'search='.$_GET['search']:''}}&orderBy={{@$_GET['orderBy']=='desc'?'asc':'desc'}}&field=created_at" class="
                                                 ">Created On  </a></th>
-                                                
-                                           
+
+
                                              <th class="text-center ">Actions</th>
                                         </tr>
                                     </thead>
@@ -145,18 +145,18 @@ $qry=DB::table('issue_type') ->where('is_deleted',0)->orderBy('id','desc')->pagi
                                         @foreach($qry as $q)
                                         <tr>
                                              <td>{{++$sno}}</td>
-                                            
+
                                             <td class="font-w600">
-                                                  {{$q->type_name}}  
+                                                  {{$q->type_name}}
                                             </td>
-                                               
-                                    
+
+
                                                  <td>{{$q->created_at}}</td>
-                                          
- 
+
+
                                             <td class="text-center">
                                                 <div class="btn-group">
-                                                 
+
                                                     <a type="button" href="{{url('edit-issue-type')}}?id={{$q->id}}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Edit">
                                                         <i class="fa fa-pencil-alt"></i>
                                                     </a>
@@ -172,24 +172,24 @@ $qry=DB::table('issue_type') ->where('is_deleted',0)->orderBy('id','desc')->pagi
                                     @endforeach
                                     </tbody>
                                 </table>
-            
+
           {{$qry->appends($_GET)->links()}}
- 
+
                             </div>
-                             
+
                         </div>
                     </div>
                     <!-- END Full Table -->
- 
+
                 </div>
                 <!-- END Page Content -->
-                   
+
 
             </main>
             <!-- END Main Container -->
             @endsection('content')
 
-   
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -198,23 +198,23 @@ $(function(){
    @if(Session::has('success'))
              Swal.fire({
   title: '{{Session::get('success')}}',
- 
- 
+
+
   confirmButtonText: 'Ok'
 })
              @endif
 
 
-             
-             
+
+
 
                $('#showdata').on('click','.btnDelete',function(){
                     var id=$(this).attr('data');
-                   
+
                     var c=confirm("Are you sure want to delete this Issue Type");
                     if(c){
                         window.location.href="{{url('delete-issue-type')}}?id="+id;
                     }
-                            })  
+                            })
            })
 </script>
